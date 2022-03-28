@@ -23,10 +23,10 @@ class game{
 
 async function fetchData(){
     const today = moment();
-    const tomorrow  = moment().add(1,'days');
+    const yesterday = moment().add(-1,'days');
 
-    const startDate = today.format('YYYY-MM-DD')+"T06:00:00.000Z";
-    const endDate=tomorrow.format('YYYY-MM-DD')+"T06:00:00.000Z";
+    const startDate =yesterday.format('YYYY-MM-DD')+"T06:00:00.000Z" ;
+    const endDate=today.format('YYYY-MM-DD')+"T06:00:00.000Z";
 
     var response = await fetch('https://balldontlie.io/api/v1/games?start_date='+startDate+'&end_date='+endDate);
     var games= await response.json();
