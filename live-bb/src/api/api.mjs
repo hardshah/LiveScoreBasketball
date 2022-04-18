@@ -30,9 +30,19 @@ async function fetchData(){
     const startDate =yesterday.format('YYYY-MM-DD')+"T06:00:00.000Z" ;
     const endDate=today.format('YYYY-MM-DD')+"T06:00:00.000Z";
 
-    var response = await axios('https://balldontlie.io/api/v1/games?start_date='+startDate+'&end_date='+endDate);
+    const headers = {
+        headers: {
+            
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            'Access-Control-Allow-Credentials':true,
+        }
+
+    }
+    var response = await axios.get('https://balldontlie.io/api/v1/games?start_date='+startDate+'&end_date='+endDate,headers
+    );
     var games= await response.data;
-    await games!=Promise;
+    while(games=== Promise){};
     var GameList = [];
     for(var i =0; i< games["data"].length;i++){
 
@@ -47,7 +57,7 @@ async function fetchData(){
 
 
         )
-        if (Game.period ==0){
+        if (Game.period ===0){
             Game.status="Game hasn't started"
         }
 
@@ -62,9 +72,6 @@ async function fetchData(){
 
 }
 
-var gamelist = await fetchData();
-console.log(gamelist)
 
 
-
-
+export default fetchData;
